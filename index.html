@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Laura · Fim do Ensino Médio</title>
-<meta name="description" content="Uma homenagem para a Laura — nossa Lalá, nossa Laurinha — pelo encerramento do Ensino Médio.">
+<title>Laura · Fim de um ciclo</title>
+<meta name="description" content="Uma homenagem para a Laura — nossa Lalá, nossa Laurinha — pelo encerramento de um ciclo.">
 <meta property="og:title" content="Para a Laura, com amor 💛">
-<meta property="og:description" content="Uma homenagem pelo encerramento do Ensino Médio.">
+<meta property="og:description" content="Uma homenagem pelo encerramento de um ciclo e o começo de outro.">
 <meta property="og:image" content="fotos/img_2183.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,7 +80,7 @@
   }
   .frase small {
     display: block; font-family: "Caveat", cursive; font-size: clamp(20px, 3.4vw, 28px);
-    color: var(--gold); margin-top: 10px; text-shadow: 0 2px 12px rgba(0,0,0,.6);
+    color: var(--gold); max-width: 34ch; margin: 10px auto 0; text-shadow: 0 2px 12px rgba(0,0,0,.6);
     opacity: 0; transform: translateY(12px);
   }
   .slide.ativo .frase p     { animation: sobe 1.2s .7s ease forwards; }
@@ -88,7 +88,10 @@
   @keyframes sobe { to { opacity: 1; transform: none; } }
 
   /* ---------- Final ---------- */
-  .slide.final .foto { object-fit: contain; }
+  .slide.final .foto {
+    top: calc(120px + env(safe-area-inset-top));
+    height: calc(100% - 380px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
   .slide.final .frase { bottom: auto; top: 0; padding-top: calc(28px + env(safe-area-inset-top)); }
   .slide.final .vinheta { background: linear-gradient(180deg, rgba(0,0,0,.8), transparent 35%, transparent 65%, rgba(0,0,0,.8)); }
   .assinatura {
@@ -96,7 +99,7 @@
     text-align: center; opacity: 0;
   }
   .slide.final.ativo .assinatura { animation: sobe 1.4s 3s ease forwards; }
-  .assinatura .grande { font-family: "Caveat", cursive; font-size: clamp(30px, 6vw, 48px); color: var(--gold); }
+  .assinatura .grande { font-family: "Caveat", cursive; font-size: clamp(22px, 4vw, 34px); line-height: 1.2; color: var(--gold); padding: 0 16px; }
   .assinatura .rever {
     margin-top: 12px; padding: 9px 20px; border-radius: 999px; font-size: 14px;
     border: 1px solid rgba(255,248,238,.4); background: var(--glass); backdrop-filter: blur(6px);
@@ -133,7 +136,7 @@
 <section id="abertura">
   <div>
     <div class="chapeu">🎓</div>
-    <p class="sobre">Fim do Ensino Médio · 2026</p>
+    <p class="sobre">Fim de um ciclo · 2026</p>
     <h1>Laura</h1>
     <p class="apelidos">nossa Lalá, nossa Laurinha</p>
     <p class="linha">Um ciclo se encerra, e a gente quis guardar um pouquinho dele aqui, para você.</p>
@@ -165,28 +168,28 @@
 // ============================================================
 const SLIDES = [
   { foto: "gopr0242.jpg",               frase: "Toda grande história começa pequenininha.",                     nota: "e a sua começou cheia de luz" },
-  { foto: "gopr0285.jpg",               frase: "Olhos curiosos, sorriso fácil — desde sempre.",                  nota: "Lalá ✨" },
+  { foto: "gopr0285.jpg",               frase: "Olhos curiosos, desde sempre.",                                   nota: "Lalá ✨" },
   { foto: "img_20170225_204500643.jpg", frase: "Você cresceu rápido demais…",                                    nota: "…e a gente nem piscou" },
   { foto: "img_20170910_145201609.jpg", frase: "Cada fase sua trouxe uma alegria nova para a família.",          nota: "Laurinha" },
   { foto: "20181117_212329.jpg",        frase: "Os melhores momentos são os que a gente divide.",                nota: "" },
   { foto: "20190628_185549.jpg",        frase: "Foram anos de cadernos, provas, amizades e descobertas.",         nota: "e muito dever de casa 😅" },
-  { foto: "img-20190720-wa0064.jpg",    frase: "Você aprendeu muito na escola…",                                 nota: "" },
-  { foto: "img-20190721-wa0026.jpg",    frase: "…mas também ensinou a gente a rir mais.",                        nota: "" },
+  { foto: "img-20190720-wa0064.jpg",    frase: "Uma coroa de flores e um sorriso que ilumina tudo.",             nota: "Laurinha 🌸" },
+  { foto: "img-20190721-wa0026.jpg",    frase: "Carinho de quem cresce junto não tem tamanho.",                  nota: "💛" },
   { foto: "20190721_132854.jpg",        frase: "Algumas memórias ficam guardadas para sempre.",                  nota: "esta é uma delas" },
-  { foto: "20230905_193548.jpg",        frase: "Mais um passo, e outro, e outro…",                               nota: "sempre do seu jeitinho" },
-  { foto: "20241225_192208.jpg",        frase: "Família é onde a gente sempre pode voltar.",                     nota: "e aqui sempre vai ter lugar pra você" },
-  { foto: "1aa4d3d8-56d1-46f4-8f1c-e2231e75ce09.jpg", frase: "Garra, foco e coração na quadra e na vida.", nota: "camisa 10 🏐" },
+  { foto: "20230905_193548.jpg",        frase: "Mais um passo, e outro, e outro…",                               nota: "e nunca sozinha 🤗" },
+  { foto: "20241225_192208.jpg",        frase: "São os pequenos momentos que guardam os grandes significados.", nota: "Natal em família 🎄" },
+  { foto: "1aa4d3d8-56d1-46f4-8f1c-e2231e75ce09.jpg", frase: "Garra, foco e coração na quadra.", nota: "camisa 10 🏐" },
   { foto: "6a7566eb-e094-45d9-bb1c-ac020c0f2cd5.jpg", frase: "O mundo é grande, e ele é todo seu.",          nota: "vai lá conhecer cada cantinho 🌍" },
   { foto: "img_1798.jpg",               frase: "Que a vida te sirva muitas mesas cheias de gente querida.",      nota: "" },
-  { foto: "img_2171.jpg",               frase: "Simples assim: você faz tudo ficar mais leve.",                  nota: "" },
-  { foto: "img_2183.jpg",               frase: "Hoje um ciclo se encerra. E que orgulho!",                       nota: "o Ensino Médio é seu, Laura 🎓" },
+  { foto: "img_2171.jpg",               frase: "Atenção: alto risco de risadas por perto.",                      nota: "cuidado, escorregadio 😂" },
+  { foto: "img_2183.jpg",               frase: "Um ciclo se encerra, e outro começa.",                           nota: "A vida traz muitos desafios, mas se você acreditar e persistir, vai superar cada um deles 💪" },
 ];
 
 const FINAL = {
   foto: "foto_para_encerrar.jpg",
   frase: "Lá atrás, eles já sabiam: você ia longe.",
   nota: "Tudo o que você é começou com muito amor.",
-  assinatura: "Parabéns, Laurinha! Com todo o amor, sua família 💛",
+  assinatura: "Com todo o amor,<br>vovó Delma, Lydiane, Guilherme, Acácia, Alexandre, Alice…<br>e, com certeza, eu, vovô Getúlio! 💛",
 };
 
 const DURACAO = 7000; // milissegundos por foto
