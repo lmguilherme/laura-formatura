@@ -126,6 +126,30 @@
   #progresso { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 20; background: rgba(255,255,255,.08); }
   #barra { height: 100%; width: 0; background: var(--gold); }
 
+  /* ---------- Sequência rápida ---------- */
+  .slide.rapido { transition-duration: .45s; }
+  .slide.cartao {
+    display: grid; place-items: center; padding: 24px; text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 45%, rgba(242,196,109,.25), transparent 60%),
+      linear-gradient(180deg, #1d1410, #0d0907);
+  }
+  .slide.cartao p {
+    font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(34px, 7vw, 72px);
+    line-height: 1.1; max-width: 16ch; opacity: 0; transform: scale(.94);
+  }
+  .slide.cartao.ativo p { animation: surge .9s .2s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes surge { to { opacity: 1; transform: none; } }
+  .rotulo {
+    position: absolute; left: 0; right: 0; bottom: calc(100px + env(safe-area-inset-bottom));
+    text-align: center; font-family: "Caveat", cursive; font-weight: 700;
+    font-size: clamp(44px, 9vw, 84px); color: var(--gold); line-height: 1;
+    text-shadow: 0 3px 22px rgba(0,0,0,.75);
+    opacity: 0; transform: translateY(14px) rotate(-3deg);
+  }
+  .slide.ativo .rotulo { animation: carimbo .5s .15s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes carimbo { to { opacity: 1; transform: rotate(-3deg); } }
+
   @media (prefers-reduced-motion: reduce) {
     .slide.ativo .foto { animation: none; }
   }
@@ -178,6 +202,16 @@ const SLIDES = [
   { foto: "20190721_132854.jpg",        frase: "Algumas memórias ficam guardadas para sempre.",                  nota: "esta é uma delas" },
   { foto: "20230905_193548.jpg",        frase: "Mais um passo, e outro, e outro…",                               nota: "e nunca sozinha 🤗" },
   { foto: "20241225_192208.jpg",        frase: "São os pequenos momentos que guardam os grandes significados.", nota: "os bons de bola ⚽" },
+
+  // --- sequência rápida: "você é várias coisas" ---
+  { cartao: "Laurinha, você é várias coisas…", dur: 3200 },
+  { foto: "primogenita.jpg", rotulo: "a Primogênita", dur: 2400 },
+  { foto: "gata.jpg",        rotulo: "a gata",        dur: 2400 },
+  { foto: "folgada.jpg",     rotulo: "a folgada",     dur: 2400 },
+  { foto: "fora_da_lei.jpg", rotulo: "a fora da lei", dur: 2400 },
+  { cartao: "e isso é bom!", dur: 3200 },
+  // --- fim da sequência rápida ---
+
   { foto: "1aa4d3d8-56d1-46f4-8f1c-e2231e75ce09.jpg", frase: "Garra, foco e coração na quadra.", nota: "camisa 10 🏐" },
   { foto: "6a7566eb-e094-45d9-bb1c-ac020c0f2cd5.jpg", frase: "O mundo é grande, e ele é todo seu.",          nota: "vai lá conhecer cada cantinho 🌍" },
   { foto: "img_1798.jpg",               frase: "Que a vida te sirva muitas mesas cheias de gente querida.",      nota: "" },
@@ -207,8 +241,24 @@ document.documentElement.style.setProperty("--dur", DURACAO + "ms");
 const todos = [...SLIDES, { ...FINAL, final: true }];
 const els = todos.map((s, i) => {
   const d = document.createElement("div");
-  d.className = "slide" + (s.final ? " final" : "");
+  d.className = "slide" + (s.final ? " final" : "") + (s.dur ? " rapido" : "");
+  if (s.dur) d.style.setProperty("--dur", s.dur + "ms");
+  if (s.cartao) {
+    d.classList.add("cartao");
+    d.innerHTML = `<p>${s.cartao}</p>`;
+    palco.appendChild(d);
+    return d;
+  }
   const src = "fotos/" + s.foto;
+  if (s.rotulo) {
+    d.innerHTML = `
+      <div class="fundo" data-bg="${src}"></div>
+      <img class="foto" data-src="${src}" alt="Laura, ${s.rotulo}">
+      <div class="vinheta"></div>
+      <div class="rotulo">${s.rotulo}</div>`;
+    palco.appendChild(d);
+    return d;
+  }
   d.innerHTML = `
     <div class="fundo" data-bg="${src}"></div>
     <img class="foto" data-src="${src}" alt="Laura — foto ${i + 1}">
@@ -222,6 +272,7 @@ const els = todos.map((s, i) => {
 function carregar(i) {
   const el = els[i]; if (!el) return;
   const img = el.querySelector(".foto"), bg = el.querySelector(".fundo");
+  if (!img) return;
   if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
   if (bg.dataset.bg) { bg.style.backgroundImage = `url("${bg.dataset.bg}")`; delete bg.dataset.bg; }
 }
@@ -230,11 +281,11 @@ let atual = -1, pausado = false, inicio = 0, decorrido = 0, raf;
 
 function mostrar(i) {
   i = Math.max(0, Math.min(todos.length - 1, i));
-  carregar(i); carregar(i + 1); carregar(i + 2);
+  for (let k = i; k <= i + 4; k++) carregar(k);
   els.forEach((el, k) => {
     el.classList.toggle("ativo", k === i);
     // reinicia animações ao voltar para um slide
-    if (k === i) { el.querySelectorAll(".foto,.frase p,.frase small,.assinatura").forEach(n => { n.style.animation = "none"; n.offsetHeight; n.style.animation = ""; }); }
+    if (k === i) { el.querySelectorAll(".foto,.frase p,.frase small,.assinatura,.rotulo,.cartao > p").forEach(n => { n.style.animation = "none"; n.offsetHeight; n.style.animation = ""; }); }
   });
   atual = i;
   contador.textContent = `${i + 1} / ${todos.length}`;
@@ -244,9 +295,9 @@ function mostrar(i) {
 function tick(t) {
   if (!pausado && atual < todos.length - 1) {
     decorrido = t - inicio;
-    if (decorrido >= DURACAO) mostrar(atual + 1);
+    if (decorrido >= (todos[atual].dur || DURACAO)) mostrar(atual + 1);
   }
-  const frac = (atual + Math.min(decorrido / DURACAO, 1)) / (todos.length - 1);
+  const frac = (atual + Math.min(decorrido / (todos[atual].dur || DURACAO), 1)) / (todos.length - 1);
   barra.style.width = (atual >= todos.length - 1 ? 100 : frac * 100) + "%";
   raf = requestAnimationFrame(tick);
 }
