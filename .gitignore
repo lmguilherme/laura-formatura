@@ -1,0 +1,7 @@
+# Fotos originais (pesadas) ficam só no computador.
+# O site usa as versões otimizadas da pasta fotos/
+/*.jpg
+/*.JPG
+/*.jpeg
+/*.HEIC
+/*.heic

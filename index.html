@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Laura · Fim do Ensino Médio</title>
+<meta name="description" content="Uma homenagem para a Laura — nossa Lalá, nossa Laurinha — pelo encerramento do Ensino Médio.">
+<meta property="og:title" content="Para a Laura, com amor 💛">
+<meta property="og:description" content="Uma homenagem pelo encerramento do Ensino Médio.">
+<meta property="og:image" content="fotos/img_2183.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #fff8ee;
+    --ink-soft: rgba(255, 248, 238, .78);
+    --gold: #f2c46d;
+    --bg: #120d0a;
+    --glass: rgba(18, 13, 10, .45);
+    --dur: 7000ms;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  html, body { height: 100%; background: var(--bg); color: var(--ink); overflow: hidden; }
+  body { font-family: "Inter", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  /* ---------- Abertura ---------- */
+  #abertura {
+    position: fixed; inset: 0; z-index: 30;
+    display: grid; place-items: center; text-align: center; padding: 24px;
+    background:
+      radial-gradient(ellipse at 50% 35%, rgba(242,196,109,.22), transparent 60%),
+      linear-gradient(180deg, #1d1410, #0d0907);
+    transition: opacity 1.2s ease, visibility 1.2s;
+  }
+  #abertura.saiu { opacity: 0; visibility: hidden; }
+  .chapeu { font-size: 44px; margin-bottom: 18px; animation: flutua 4s ease-in-out infinite; }
+  @keyframes flutua { 50% { transform: translateY(-8px) rotate(-4deg); } }
+  .sobre { letter-spacing: .28em; text-transform: uppercase; font-size: 12px; color: var(--gold); margin-bottom: 14px; }
+  #abertura h1 { font-family: "Fraunces", serif; font-weight: 600; font-size: clamp(52px, 13vw, 120px); line-height: .95; }
+  .apelidos { font-family: "Caveat", cursive; font-size: clamp(26px, 6vw, 38px); color: var(--gold); margin-top: 10px; }
+  .linha { color: var(--ink-soft); margin: 22px auto 34px; max-width: 30ch; line-height: 1.6; }
+  .btn-comecar {
+    padding: 15px 34px; border-radius: 999px; font-weight: 500; letter-spacing: .04em;
+    background: var(--gold); color: #2a1a0c;
+    box-shadow: 0 10px 40px rgba(242,196,109,.35);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-comecar:hover { transform: translateY(-2px); box-shadow: 0 14px 50px rgba(242,196,109,.5); }
+  .dica { margin-top: 18px; font-size: 13px; color: rgba(255,248,238,.5); }
+
+  /* ---------- Slides ---------- */
+  #palco { position: fixed; inset: 0; }
+  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; overflow: hidden; }
+  .slide.ativo { opacity: 1; }
+  .fundo {
+    position: absolute; inset: -40px; background-size: cover; background-position: center;
+    filter: blur(28px) brightness(.45) saturate(1.2);
+  }
+  .foto {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+    transform: scale(1);
+  }
+  .slide.ativo .foto { animation: kenburns calc(var(--dur) + 1500ms) ease-out forwards; }
+  .slide:nth-child(even).ativo .foto { animation-name: kenburns2; }
+  @keyframes kenburns  { from { transform: scale(1.0) } to { transform: scale(1.07) translate(-1%, -1%) } }
+  @keyframes kenburns2 { from { transform: scale(1.07) translate(1%, 0) } to { transform: scale(1.0) } }
+
+  .vinheta { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.75)); pointer-events: none; }
+  .frase {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0 24px calc(96px + env(safe-area-inset-bottom)); text-align: center;
+  }
+  .frase p {
+    font-family: "Fraunces", serif; font-size: clamp(22px, 4.2vw, 40px); line-height: 1.25;
+    max-width: 26ch; margin: 0 auto; text-shadow: 0 2px 18px rgba(0,0,0,.6);
+    opacity: 0; transform: translateY(16px);
+  }
+  .frase small {
+    display: block; font-family: "Caveat", cursive; font-size: clamp(20px, 3.4vw, 28px);
+    color: var(--gold); margin-top: 10px; text-shadow: 0 2px 12px rgba(0,0,0,.6);
+    opacity: 0; transform: translateY(12px);
+  }
+  .slide.ativo .frase p     { animation: sobe 1.2s .7s ease forwards; }
+  .slide.ativo .frase small { animation: sobe 1.2s 1.4s ease forwards; }
+  @keyframes sobe { to { opacity: 1; transform: none; } }
+
+  /* ---------- Final ---------- */
+  .slide.final .foto { object-fit: contain; }
+  .slide.final .frase { bottom: auto; top: 0; padding-top: calc(28px + env(safe-area-inset-top)); }
+  .slide.final .vinheta { background: linear-gradient(180deg, rgba(0,0,0,.8), transparent 35%, transparent 65%, rgba(0,0,0,.8)); }
+  .assinatura {
+    position: absolute; left: 0; right: 0; bottom: calc(92px + env(safe-area-inset-bottom));
+    text-align: center; opacity: 0;
+  }
+  .slide.final.ativo .assinatura { animation: sobe 1.4s 3s ease forwards; }
+  .assinatura .grande { font-family: "Caveat", cursive; font-size: clamp(30px, 6vw, 48px); color: var(--gold); }
+  .assinatura .rever {
+    margin-top: 12px; padding: 9px 20px; border-radius: 999px; font-size: 14px;
+    border: 1px solid rgba(255,248,238,.4); background: var(--glass); backdrop-filter: blur(6px);
+  }
+
+  /* ---------- Controles ---------- */
+  #controles {
+    position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+    display: flex; align-items: center; gap: 4px; padding: 6px; z-index: 20;
+    border-radius: 999px; background: var(--glass); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.12);
+    transition: opacity .6s ease;
+  }
+  body.ocioso #controles { opacity: .15; }
+  #controles button {
+    width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
+    transition: background .2s;
+  }
+  #controles button:hover { background: rgba(255,255,255,.12); }
+  #controles svg { width: 20px; height: 20px; fill: currentColor; }
+  #controles .mudo svg.on, #controles:not(.mudo) svg.off { display: none; }
+  #contador { font-size: 13px; color: var(--ink-soft); min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
+
+  #progresso { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 20; background: rgba(255,255,255,.08); }
+  #barra { height: 100%; width: 0; background: var(--gold); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide.ativo .foto { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<section id="abertura">
+  <div>
+    <div class="chapeu">🎓</div>
+    <p class="sobre">Fim do Ensino Médio · 2026</p>
+    <h1>Laura</h1>
+    <p class="apelidos">nossa Lalá, nossa Laurinha</p>
+    <p class="linha">Um ciclo se encerra, e a gente quis guardar um pouquinho dele aqui, para você.</p>
+    <button class="btn-comecar" id="comecar">Começar ▸</button>
+    <p class="dica">liga o som 🔊</p>
+  </div>
+</section>
+
+<div id="progresso"><div id="barra"></div></div>
+<main id="palco" aria-live="polite"></main>
+
+<nav id="controles" hidden>
+  <button id="anterior" aria-label="Foto anterior"><svg viewBox="0 0 24 24"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg></button>
+  <button id="pausa" aria-label="Pausar"><svg viewBox="0 0 24 24"><path id="icone-pausa" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+  <span id="contador"></span>
+  <button id="proxima" aria-label="Próxima foto"><svg viewBox="0 0 24 24"><path d="M8.6 5.4 10 4l8 8-8 8-1.4-1.4 6.6-6.6z"/></svg></button>
+  <button id="som" aria-label="Ligar ou desligar música" hidden>
+    <svg class="on" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>
+    <svg class="off" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4z"/></svg>
+  </button>
+</nav>
+
+<!-- Coloque um arquivo chamado musica.mp3 nesta pasta para ter música de fundo -->
+<audio id="musica" src="musica.mp3" loop preload="auto"></audio>
+
+<script>
+// ============================================================
+//  EDITE AQUI: fotos e frases (na ordem em que aparecem)
+// ============================================================
+const SLIDES = [
+  { foto: "gopr0242.jpg",               frase: "Toda grande história começa pequenininha.",                     nota: "e a sua começou cheia de luz" },
+  { foto: "gopr0285.jpg",               frase: "Olhos curiosos, sorriso fácil — desde sempre.",                  nota: "Lalá ✨" },
+  { foto: "img_20170225_204500643.jpg", frase: "Você cresceu rápido demais…",                                    nota: "…e a gente nem piscou" },
+  { foto: "img_20170910_145201609.jpg", frase: "Cada fase sua trouxe uma alegria nova para a família.",          nota: "Laurinha" },
+  { foto: "20181117_212329.jpg",        frase: "Os melhores momentos são os que a gente divide.",                nota: "" },
+  { foto: "20190628_185549.jpg",        frase: "Foram anos de cadernos, provas, amizades e descobertas.",         nota: "e muito dever de casa 😅" },
+  { foto: "img-20190720-wa0064.jpg",    frase: "Você aprendeu muito na escola…",                                 nota: "" },
+  { foto: "img-20190721-wa0026.jpg",    frase: "…mas também ensinou a gente a rir mais.",                        nota: "" },
+  { foto: "20190721_132854.jpg",        frase: "Algumas memórias ficam guardadas para sempre.",                  nota: "esta é uma delas" },
+  { foto: "20230905_193548.jpg",        frase: "Mais um passo, e outro, e outro…",                               nota: "sempre do seu jeitinho" },
+  { foto: "20241225_192208.jpg",        frase: "Família é onde a gente sempre pode voltar.",                     nota: "e aqui sempre vai ter lugar pra você" },
+  { foto: "1aa4d3d8-56d1-46f4-8f1c-e2231e75ce09.jpg", frase: "Garra, foco e coração na quadra e na vida.", nota: "camisa 10 🏐" },
+  { foto: "6a7566eb-e094-45d9-bb1c-ac020c0f2cd5.jpg", frase: "O mundo é grande, e ele é todo seu.",          nota: "vai lá conhecer cada cantinho 🌍" },
+  { foto: "img_1798.jpg",               frase: "Que a vida te sirva muitas mesas cheias de gente querida.",      nota: "" },
+  { foto: "img_2171.jpg",               frase: "Simples assim: você faz tudo ficar mais leve.",                  nota: "" },
+  { foto: "img_2183.jpg",               frase: "Hoje um ciclo se encerra. E que orgulho!",                       nota: "o Ensino Médio é seu, Laura 🎓" },
+];
+
+const FINAL = {
+  foto: "foto_para_encerrar.jpg",
+  frase: "Lá atrás, eles já sabiam: você ia longe.",
+  nota: "Tudo o que você é começou com muito amor.",
+  assinatura: "Parabéns, Laurinha! Com todo o amor, sua família 💛",
+};
+
+const DURACAO = 7000; // milissegundos por foto
+// ============================================================
+
+const palco = document.getElementById("palco");
+const barra = document.getElementById("barra");
+const contador = document.getElementById("contador");
+const controles = document.getElementById("controles");
+const musica = document.getElementById("musica");
+const btnSom = document.getElementById("som");
+const iconePausa = document.getElementById("icone-pausa");
+document.documentElement.style.setProperty("--dur", DURACAO + "ms");
+
+const todos = [...SLIDES, { ...FINAL, final: true }];
+const els = todos.map((s, i) => {
+  const d = document.createElement("div");
+  d.className = "slide" + (s.final ? " final" : "");
+  const src = "fotos/" + s.foto;
+  d.innerHTML = `
+    <div class="fundo" data-bg="${src}"></div>
+    <img class="foto" data-src="${src}" alt="Laura — foto ${i + 1}">
+    <div class="vinheta"></div>
+    <div class="frase"><p>${s.frase}</p>${s.nota ? `<small>${s.nota}</small>` : ""}</div>
+    ${s.final ? `<div class="assinatura"><div class="grande">${s.assinatura}</div><button class="rever">↺ ver de novo</button></div>` : ""}`;
+  palco.appendChild(d);
+  return d;
+});
+
+function carregar(i) {
+  const el = els[i]; if (!el) return;
+  const img = el.querySelector(".foto"), bg = el.querySelector(".fundo");
+  if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+  if (bg.dataset.bg) { bg.style.backgroundImage = `url("${bg.dataset.bg}")`; delete bg.dataset.bg; }
+}
+
+let atual = -1, pausado = false, inicio = 0, decorrido = 0, raf;
+
+function mostrar(i) {
+  i = Math.max(0, Math.min(todos.length - 1, i));
+  carregar(i); carregar(i + 1); carregar(i + 2);
+  els.forEach((el, k) => {
+    el.classList.toggle("ativo", k === i);
+    // reinicia animações ao voltar para um slide
+    if (k === i) { el.querySelectorAll(".foto,.frase p,.frase small,.assinatura").forEach(n => { n.style.animation = "none"; n.offsetHeight; n.style.animation = ""; }); }
+  });
+  atual = i;
+  contador.textContent = `${i + 1} / ${todos.length}`;
+  decorrido = 0; inicio = performance.now();
+}
+
+function tick(t) {
+  if (!pausado && atual < todos.length - 1) {
+    decorrido = t - inicio;
+    if (decorrido >= DURACAO) mostrar(atual + 1);
+  }
+  const frac = (atual + Math.min(decorrido / DURACAO, 1)) / (todos.length - 1);
+  barra.style.width = (atual >= todos.length - 1 ? 100 : frac * 100) + "%";
+  raf = requestAnimationFrame(tick);
+}
+
+function setPausa(p) {
+  pausado = p;
+  if (!p) inicio = performance.now() - decorrido;
+  iconePausa.setAttribute("d", p ? "M8 5v14l11-7z" : "M7 5h4v14H7zM13 5h4v14h-4z");
+  document.getElementById("pausa").setAttribute("aria-label", p ? "Continuar" : "Pausar");
+}
+
+// ---- música (só aparece se existir musica.mp3) ----
+let temMusica = false;
+musica.addEventListener("canplay", () => { temMusica = true; btnSom.hidden = false; }, { once: true });
+function fadeVolume(alvo, ms = 2000) {
+  const de = musica.volume, t0 = performance.now();
+  (function passo(t) {
+    const f = Math.min((t - t0) / ms, 1);
+    musica.volume = de + (alvo - de) * f;
+    if (f < 1) requestAnimationFrame(passo);
+  })(t0);
+}
+function tocar() {
+  musica.volume = 0;
+  musica.play().then(() => { controles.classList.remove("mudo"); fadeVolume(.7); })
+               .catch(() => controles.classList.add("mudo"));
+}
+btnSom.onclick = () => {
+  if (musica.paused) tocar(); else { musica.pause(); controles.classList.add("mudo"); }
+};
+
+// ---- início ----
+carregar(0); carregar(1);
+document.getElementById("comecar").onclick = () => {
+  document.getElementById("abertura").classList.add("saiu");
+  controles.hidden = false;
+  tocar();
+  mostrar(0);
+  raf = requestAnimationFrame(tick);
+};
+
+document.getElementById("anterior").onclick = () => mostrar(atual - 1);
+document.getElementById("proxima").onclick = () => mostrar(atual + 1);
+document.getElementById("pausa").onclick = () => setPausa(!pausado);
+palco.addEventListener("click", e => { if (e.target.closest(".rever")) { setPausa(false); mostrar(0); } });
+
+document.addEventListener("keydown", e => {
+  if (atual < 0) return;
+  if (e.key === "ArrowRight") mostrar(atual + 1);
+  else if (e.key === "ArrowLeft") mostrar(atual - 1);
+  else if (e.key === " ") { e.preventDefault(); setPausa(!pausado); }
+});
+
+// deslizar no celular
+let x0 = null;
+palco.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+palco.addEventListener("touchend", e => {
+  if (x0 === null) return;
+  const dx = e.changedTouches[0].clientX - x0; x0 = null;
+  if (Math.abs(dx) > 50) mostrar(atual + (dx < 0 ? 1 : -1));
+});
+
+// controles ficam discretos quando o mouse para
+let ocioso;
+const acordar = () => { document.body.classList.remove("ocioso"); clearTimeout(ocioso); ocioso = setTimeout(() => document.body.classList.add("ocioso"), 3000); };
+["mousemove", "touchstart", "keydown"].forEach(ev => document.addEventListener(ev, acordar, { passive: true }));
+</script>
+</body>
+</html>
