@@ -183,8 +183,8 @@
   </button>
 </nav>
 
-<!-- Coloque um arquivo chamado musica.mp3 nesta pasta para ter música de fundo -->
-<audio id="musica" src="musica.mp3" loop preload="auto"></audio>
+<!-- Música de fundo: trilha.m4a (musica.m4a sem os 20 segundos iniciais) -->
+<audio id="musica" src="trilha.m4a" loop preload="auto"></audio>
 
 <script>
 // ============================================================
@@ -309,7 +309,7 @@ function setPausa(p) {
   document.getElementById("pausa").setAttribute("aria-label", p ? "Continuar" : "Pausar");
 }
 
-// ---- música (só aparece se existir musica.mp3) ----
+// ---- música (botão só aparece se o arquivo existir) ----
 let temMusica = false;
 musica.addEventListener("canplay", () => { temMusica = true; btnSom.hidden = false; }, { once: true });
 function fadeVolume(alvo, ms = 2000) {
